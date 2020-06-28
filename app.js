@@ -15,6 +15,10 @@ const users = express.Router();
 app.use("/users",users);
 require('./routes/users')(users)
 
+const blogs = express.Router();
+app.use("/users",blogs);
+require('./routes/blog')(blogs)
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

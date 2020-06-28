@@ -1,15 +1,16 @@
 const { users } = require('../models');
-const user = require('../models/user');
 module.exports = class UserService {
-  
+
   constructor(db) {
     this.db = db || users
   }
   // Get only one data
-  async getById(id) {    
-    const users = await this.db.findOne({ where: {
-      id
-    }})
+  async getById(id) {
+    const users = await this.db.findOne({
+      where: {
+        id
+      }
+    })
     return users;
   }
 
@@ -24,10 +25,18 @@ module.exports = class UserService {
     return userData;
   }
 
-  async deleteUser(id){
+  async deleteUser(id) {
     const user_info = await this.db.destroy({
       where: { id }
-    })    
+    })
     return user_info;
+  }
+
+  async UserUpdate(id, details) {
+    await this.db.update(
+      details, {
+        where: { id }
+    })
+    return this.getById(id)
   }
 };
